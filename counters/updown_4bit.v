@@ -1,0 +1,20 @@
+module updown_4bit(clk, rst, hi, updown, q, qb);
+input clk,rst, hi, updown;
+output [3:0]q; 
+output [3:0]qb;
+assign hi = 1'b1;
+wire w1, w2, w3, w4, w5, w6, w7, w8, w9, w10;
+not n1(w1,updown);
+and a1(w2, q[0], updown);
+and a2(w3, qb[0], w1);
+or r1(w4, w2, w3);
+and a3(w5, q[1], updown); and a4(w6, qb[1], w1);
+or r2(w7, w5, w6); 
+and a5(w8, q[2], updown);
+and a6(w9, qb[2], w1);
+or r3(w10, w8, w9); 
+jkflipflop j1(clk, rst, hi, hi, q[0], qb[0]);
+jkflipflop j2(w4, rst, hi, hi, q[1], qb[1]);
+jkflipflop j3(w7, rst, hi, hi, q[2], qb[2]);
+jkflipflop j4(w10, rst, hi, hi, q[3], qb[3]);
+endmodule
